@@ -1,5 +1,5 @@
 const sequelize = require("./db");
-const Videos = require("../models/Videos");
+const Videos = require("../models/videos");
 const Movies = require("../models/movies");
 const Genre = require("../models/genre");
 const Person = require("../models/person");
