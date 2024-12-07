@@ -1,0 +1,87 @@
+<%- include('../partials/head') %>
+<body id="page-top">
+
+    <div id="wrapper">
+    
+    <%- include('../partials/sidebar') %>
+    
+    
+    <div id="content-wrapper" class="d-flex flex-column">
+    
+    <div id="content">
+    
+    <%- include('../partials/navbar') %>
+    
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-3 col-lg-3">
+            <div class="bg-white p-3 widget shadow rounded mb-4">
+            <img src="/static/img/<%= people.image %>" class="img-fluid rounded" alt="...">
+            <h1 class="h6 mb-3 mt-3 font-weight-bold text-gray-900">Personal Info</h1>
+            <p class="mb-2"><i class="fas fa-user-circle fa-fw"></i> Known For - <%= people.duty_types %></p>
+            <p class="mb-2"><i class="fas fa-venus-mars fa-fw"></i> Gender - <%= people.gender %></p>
+            <p class="mb-2"><i class="fas fa-calendar-alt fa-fw"></i> Date of Birth - <%= people.birthday %></p>
+            <p class="mb-2"><i class="fas fa-map-marker-alt fa-fw"></i> <%= people.city %></p>
+            </div>
+            </div>
+            <div class="col-xl-9 col-lg-9">
+            <div class="bg-white info-header shadow rounded mb-4">
+            <div class="row d-flex align-items-center justify-content-between p-3 border-bottom">
+            <div class="col-lg-7 m-b-4">
+            <h3 class="text-gray-900 mb-0 mt-0 font-weight-bold"><%= people.name %></h3>
+            <p class="mb-0 text-gray-800"><small class="text-muted"><i class="fas fa-user-circle fa-fw fa-sm mr-1"></i> <%= people.duty_types %></small></p>
+            </div>
+            </div>
+            <div class="p-3 mb-4">
+            <h1 class="h6 mb-3 mt-0 font-weight-bold text-gray-900">Biography</h1>
+            <div>
+            <p class="mb-0 text-gray-600"><%= people.biography%>
+            </p>
+            </div>
+            </div>
+            </div>
+            <div class="bg-white p-3 widget shadow rounded mb-4">
+            <h1 class="h6 mb-3 mt-0 font-weight-bold text-gray-900">Biography</h1>
+            <div class="row">
+                <% people.Movies.forEach(movie => { %>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card m-card shadow border-0">
+                        <a href="/movies/<%= movie.url %>">
+                        <div class="m-card-cover">
+                        <img src="/static/img/<%= movie.image %>" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body p-3">
+                        <h5 class="card-title text-gray-900 mb-1"><%= movie.title %></h5>
+                        <p class="card-text"><small class="text-muted"><%= movie.language %></small> <small class="text-danger"><i class="fas fa-calendar-alt fa-sm text-gray-400"></i> <%= movie.date %></small> </p>
+                        </div>
+                        </a>
+                        </div>
+                        </div>
+                <% }) %>
+            </div>
+            </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+        <span>Copyright © Bookishow 2019 | Made with <i class="fas fa-heart fa-fw text-danger"></i> by <a target="_blank" href="#">Askbootstrap</a></span>
+        </div>
+        </div>
+    </footer>
+    
+    </div>
+    
+   
+    
+    </div>
+    
+    </div>
+    
+    
+</body>

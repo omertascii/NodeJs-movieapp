@@ -1,0 +1,82 @@
+<%- include('../partials/head') %>
+
+<body>
+  <div id="wrapper">
+    <%- include('../partials/sidebar') %> 
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <%- include('../partials/navbar') %>
+        <div class="container">
+          <div class="row">
+              <form method="post" enctype="multipart/form-data" action="/admin/add-people?_csrf=<%= csrfToken %>">
+              <% if (typeof message != "undefined") { %>
+                  <div class="alert alert-<%= message.class %>">
+                      <%= message.text %>
+                  </div>
+              <% } %>
+              <div class="col-lg-12">
+                  <div class="mb-3">
+                      <label for="exampleFormControlInput1" class="form-label">Name:</label>
+                      <input type="text" class="form-control" name="name">
+                  </div>
+                  <div class="mb-3">
+                  <label for="description" class="form-label">Biography</label>
+                  <textarea class="form-control" name="biography" rows="3"></textarea>
+                  </div>
+                  <div class="mb-3">
+                      <label for="image" class="form-label">İmage:</label>
+                      <input type="file" class="form-control" name="images">
+                  </div>
+                  <div class="mb-3">
+                      <label for="background" class="form-label">Birthday:</label>
+                      <input type="text" class="form-control" name="birthday">
+                  </div>
+                  <div class="mb-3">
+                      <label for="language" class="form-label">City:</label>
+                      <input type="text" class="form-control" name="city">
+                  </div>
+                  <div class="mb-3">
+                      <label for="genre" class="form-label">Gender:</label>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="gender" value="Erkek" id="gender">
+                          <label class="form-check-label" for="flexRadioDefault1">
+                            Erkek
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="gender" value="Kadın" id="gender" >
+                          <label class="form-check-label" for="flexRadioDefault2">
+                            Kadın
+                          </label>
+                        </div>
+                  </div>
+                  <div class="mb-3">
+                      <label for="genre" class="form-label">Duty Type:</label>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="duty_type" value="Yönetmen" id="duty_type">
+                          <label class="form-check-label" for="flexRadioDefault1">
+                            Yönetmen
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="duty_type" value="Oyuncu" id="duty_type" >
+                          <label class="form-check-label" for="flexRadioDefault2">
+                            Oyuncu
+                          </label>
+                        </div>
+                  </div>
+                  <div class="mb-3">
+                      <button class="btn btn-primary" type="submit">Add People</button>
+                  </div>
+  
+              </div>
+              </form>
+          </div>
+      </div>
+      </div>     
+    </div>
+  </div>
+</body>
+
+
+

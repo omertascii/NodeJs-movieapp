@@ -1,0 +1,50 @@
+<%- include('../partials/head') %>
+
+<body>
+    <div id="wrapper">
+        <%- include('../partials/sidebar') %>
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <%- include('../partials/navbar') %>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                        <div class="p-5">
+                        <form action="" method="post">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <% if (typeof message != "undefined") { %>
+                                <div class="alert alert-<%= message.class %>">
+                                    <%= message.text %>
+                                </div>
+                            <% } %>
+                            <div class="form-group">
+                                <label for="genre">Title:</label>
+                                <input type="text" class="form-control" name="title">
+                            </div>
+                            <div class="form-group">
+                                <label for="genre">Url:</label>
+                                <input type="text" class="form-control" name="url">
+                            </div>
+                            <div class="mb-3">
+                                <label for="category" class="col-sm-2 col-form-label">Movie:</label>
+                                <div class="col-sm-10">
+                                  <select class="form-select" name="movie" name="movie">
+                                    <option value="-1" selected>Seçiniz</option>
+                                    <% movies.forEach(movie => { %>
+                                        <option value="<%= movie.id %>"><%= movie.title %></option>
+                                    <% }) %>
+                                  </select>
+                                </div>
+                            </div> 
+                            <div class="mb-3">
+                                <button class="btn btn-primary" type="submit">Add Video</button>
+                            </div>
+                        </form>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

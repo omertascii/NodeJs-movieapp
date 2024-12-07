@@ -1,0 +1,217 @@
+<%- include('../partials/head') %>
+<body id="page-top">
+
+    <div id="wrapper">
+    
+    <%- include('../partials/sidebar') %>
+    
+    
+    <div id="content-wrapper" class="d-flex flex-column">
+    
+    <div id="content">
+    
+    <%- include('../partials/navbar') %>
+    
+    
+    <div class="container-fluid">
+    <div class="row">
+    <div class="col-xl-12 col-lg-12">
+    <div class="cover-pic">
+    <img src="/static/img/<%= movie.background %>" class="img-fluid" alt="...">
+    </div>
+    </div>
+    <div class="col-xl-3 col-lg-3">
+    <div class="bg-white p-3 widget shadow rounded mb-4">
+    <img src="/static/img/<%= movie.image %>" class="img-fluid rounded" alt="...">
+    <% movie.People.forEach(person => { %>
+    <% if (person.duty_types == "Yönetmen") { %>
+    <h1 class="h6 mb-0 mt-3 font-weight-bold text-gray-900">Director</h1>
+         <p><%= person.name %></p>
+        <% } %>
+        <% }) %>
+    <h1 class="h6 mb-0 mt-3 font-weight-bold text-gray-900">Cast</h1>
+    <div style="display: flex; flex-wrap: wrap;">
+    <% movie.People.forEach(person => { %>
+    <% if (person.duty_types == "Oyuncu") { %>
+        <p style="margin-right: 10px;"><%= person.name %></p>     
+    <% } %>
+    <% }) %>
+    </div>
+    </div>
+    </div> 
+    <div class="col-xl-9 col-lg-9">
+    <div class="bg-white info-header shadow rounded mb-4">
+    <div class="row d-flex align-items-center justify-content-between p-3 border-bottom">
+    <div class="col-lg-7 m-b-4">
+    <h3 class="text-gray-900 mb-0 mt-0 font-weight-bold"><%= movie.title %> <small><%= movie.date %></small></h3>
+        <p class="mb-0 text-gray-800"><small class="text-muted"><i class="fas fa-film fa-fw fa-sm mr-1"></i> <%= genre.name %></small></p>
+    </div>
+    <div class="col-lg-5 text-right">
+        <form action="/add-to-watchlist/<%= movie.id %>">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button class="btn btn-primary" type="submit">Add To WatchList</button>
+        </form>
+    </div>
+    </div>
+    <div class="row d-flex align-items-center justify-content-between py-3 px-4">
+    <div class="col-lg-6 m-b-4">
+    <p class="mb-0 text-gray-900"><i class="fas fa-money-bill fa-sm fa-fw mr-1"></i> BUDGET - <span class="text-white rounded px-2 py-1 bg-info">$<%= movie.budget %></span></p>
+    </div>
+    </div>
+    </div>
+    <div class="bg-white p-3 widget shadow rounded mb-4">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Summary</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Cast
+    </a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" id="videos-tab" data-toggle="tab" href="#videos" role="tab" aria-controls="videos" aria-selected="false">Videos
+     </a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Reviews</a>
+    </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <h5 class="mt-0 mb-3"><%= movie.title %></h5>
+    <p><%= movie.description %></p>
+    </div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="row">
+    <div class="col-xl-4 col-lg-4">
+    <h5 class="h6 mt-0 mb-3 font-weight-bold text-gray-900">CAST</h5>
+    <div style="display: flex; flex-wrap: wrap;">
+    <% movie.People.forEach(person => { %>
+        <div class="artist-list mb-3" style="display: flex; align-items: center; margin: 15px; width: 40%; box-sizing: border-box;">
+            <a class="d-flex align-items-center" href="/people/<%= person.url %>">
+            <div class="dropdown-list-image mr-3">
+            <img class="rounded-circle" src="/static/img/<%= person.image %>" alt="">
+            <div class="status-indicator bg-success"></div>
+            </div>
+            <div class="font-weight-bold">
+            <div class="text-truncate"><%= person.name %></div>
+            <div class="small text-gray-500"><%= person.duty_types %></div>
+            </div>
+            </a>
+            </div>
+    <% }) %>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
+    <div class="row">
+        <% videos.forEach(video => { %>
+            <div class="col-xl-6 col-lg-6">
+                <div class="mb-4">
+                <iframe width="100%" height="215" src="https://www.youtube.com/embed/<%= video.url %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                </div>
+                </div>
+        <% }) %>
+    </div>
+    </div>
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+    <div class="card-body p-0 reviews-card">
+    
+        <% comments.forEach(comment => { %>
+        <div class="media mb-4">
+            <img class="d-flex mr-3 rounded-circle" src="/static/img/<%= comment.User.image %>" alt="">
+            <div class="media-body">
+            <div class="mt-0 mb-1">
+            <span class="h6 mr-2 font-weight-bold text-gray-900"><%= comment.User.nickname %></span> <span><i class="fa fa-calendar"></i> <%= comment.createdAt %></span>
+            <div class="stars-rating float-right">
+                    <% for( let j = 0; j < comment.rating; j++ ) { %>
+                        <i class="fa fa-star active"></i>
+                    <% } %>
+                    <% for( let i = 0; i < (5 - comment.rating); i++ ) { %>
+                        <i class="fa fa-star"></i> 
+                    <% } %>
+                    <span class="rounded bg-warning text-dark pl-1 pr-1">5/<%= comment.rating %></span>
+            </div>
+            </div>
+            <p><%= comment.message %></p>
+            </div>
+        </div>
+        <% }) %>
+             
+    </div>
+    <div class="p-4 bg-light rounded mt-4">
+    <h5 class="card-title mb-4">Leave a Review</h5>
+    <form name="sentMessage" method="post">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input type="hidden" name="userid" value="<%= userid %>">
+    <div class="row">
+    <div class="control-group form-group col-lg-4 col-md-4">
+    <div class="controls">
+    <label>Rating <span class="text-danger">*</span></label>
+    <select class="form-control custom-select" name="rating">
+    <option value="1">1 Star</option>
+    <option value="2">2 Star</option>
+    <option value="3">3 Star</option>
+    <option value="4">4 Star</option>
+    <option value="5">5 Star</option>
+    </select>
+    </div>
+    </div>
+    </div>
+    <div class="control-group form-group">
+    <div class="controls">
+    <label>Review <span class="text-danger">*</span></label>
+    <textarea rows="3" name="message" cols="100" class="form-control"></textarea>
+    </div>
+    </div>
+    <div class="text-right">
+    <button type="submit" class="btn btn-primary">Send Message</button>
+    </div>
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    </div>
+    
+    
+    <footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+    <div class="copyright text-center my-auto">
+    <span>Copyright © Bookishow 2019 | Made with <i class="fas fa-heart fa-fw text-danger"></i> by <a target="_blank" href="#">Askbootstrap</a></span>
+    </div>
+    </div>
+    </footer>
+    
+    </div>
+    
+    </div>
+    
+    
+    <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+    </a>
+    
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">×</span>
+    </button>
+    </div>
+    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+    <div class="modal-footer">
+    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+    <a class="btn btn-primary" href="login.html">Logout</a>
+    </div>
+    </div>
+    </div>
+    </div>
+</body>

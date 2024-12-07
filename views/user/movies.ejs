@@ -1,0 +1,75 @@
+<%- include('../partials/head') %>
+
+<body>
+    <div id="wrapper">
+        <%- include('../partials/sidebar') %>
+        <div id="content-wrapper" class="d-flex-column">
+            <div id="content">
+                <%- include('../partials/navbar') %>
+
+                <div class="container-fluid">
+
+                    <div class="d-sm-flex align-items-center justify-content-between mt-4 mb-3">
+                    <h1 class="h5 mb-0 text-gray-900">Movies</h1>
+                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Reset Filters <i class="fas fa-times fa-sm text-white-50"></i></a>
+                    </div>
+                    
+                    <div class="row">
+                      <% if (typeof message != "undefined") { %>
+                        <div class="alert alert-<%= message.class %>">
+                            <%= message.text %>
+                        </div>
+                    <% } %>  
+
+                    <% if (movies && movies.length > 0) { %>              
+                    <div class="col">
+                    <div class="row">
+                        <% movies.forEach(movie => { %>
+                            <div class="col-xl-4 col-md-6 mb-4">
+                                <div class="card m-card shadow border-0">
+                                <a href="/movies/<%= movie.url %>">
+                                <div class="m-card-cover">
+                                <div class="position-absolute bg-white shadow-sm rounded text-center p-2 m-2 love-box">
+                                <h6 class="text-gray-900 mb-0 font-weight-bold"><i class="fas fa-heart text-danger"></i> 88%</h6>
+                                <small class="text-muted">23,421</small>
+                                </div>
+                                <img src="static/img/<%= movie.image %>" class="card-img-top" alt="...">
+                                </div>
+                                <div class="card-body p-3">
+                                <h5 class="card-title text-gray-900 mb-1"><%= movie.title %></h5>
+                                <p class="card-text"><small class="text-muted"><%= movie.language %></small> <small class="text-danger"><i class="fas fa-calendar-alt fa-sm text-gray-400"></i> <%= movie.date %></small> </p>
+                                <% if (isAdmin) { %>
+                                  <a href="/admin/remove/<%= movie.id %>"><button class="btn btn-danger btn-block btn-sm"><i class="fas fa-trash"></i> Remove</button></a>
+                                <% } %>
+                                </div>
+                                </a>
+                                </div>
+                                </div>
+                        <% }) %>
+                    </div>
+
+                    <nav aria-label="...">
+                            <ul class="pagination justify-content-center">
+                              <li class="page-item    ">
+                                <a class="page-link" href="?page=0">İlk sayfa</a>
+                              </li>
+                              <% for( let i = 0; i < totalPages; i++ ) { %>
+                              <li class="page-item" aria-current="page">
+                                <a class="page-link <%= (i == currentPage) ? "active" : "" %>" href="?page=<%= i %>"><%= i + 1 %></a>
+                              </li>
+                              <% } %>
+                              <li class="page-item">
+                                <a class="page-link" href="?page=<%= totalPages - 1 %>">Son sayfa</a>
+                              </li>
+                            </ul>
+                    </nav>
+
+                    </div>
+                    <% } %>
+                    </div>
+                    
+                    </div>
+            </div>
+        </div>
+    </div>
+</body>
