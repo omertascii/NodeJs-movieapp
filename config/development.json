@@ -1,6 +1,8 @@
 {
     "db": {
-        "username": "root",
-        "database": "nodedb"
+        "username": "DB_USER",
+        "database": "nodedb",
+        "host": "DB_HOST",
+        "port": "DB_PORT"
     }
 }
