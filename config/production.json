@@ -3,6 +3,7 @@
         "username": "DB_USER",
         "database": "DB_DATABASE",
         "host": "DB_HOST",
-        "port": "DB_PORT"
+        "port": "DB_PORT",
+        "url": "JAWSDB_URL"
     }
 }

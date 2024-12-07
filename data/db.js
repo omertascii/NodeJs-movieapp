@@ -4,8 +4,9 @@ const config = require("config")
 
 
 
-const sequelize = new Sequelize(JAWSDB_URL,{
-    dialect: "mysql"
+const sequelize = new Sequelize(config.db.url,{
+    dialect: "mysql",
+
 });
 
 module.exports = sequelize;
