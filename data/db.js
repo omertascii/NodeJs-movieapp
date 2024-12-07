@@ -4,7 +4,7 @@ const config = require("config")
 
 
 
-const sequelize = new Sequelize(process.env.JAWSDB_URL,{
+const sequelize = new Sequelize(JAWSDB_URL,{
     dialect: "mysql"
 });
 
