@@ -6,7 +6,6 @@ const config = require("config")
 
 const sequelize = new Sequelize(config.db.url,{
     dialect: "mysql",
-
 });
 
 module.exports = sequelize;
