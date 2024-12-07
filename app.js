@@ -10,6 +10,11 @@ const session = require("express-session");
 const csurf = require("csurf");
 const locals = require("./middlewares/locals");
 
+if(process.env.NODE_ENV == "production"){
+    require("./production")(app);
+}
+
+
 const SequelizeStore = require("connect-session-sequelize")(session.Store)
 
 app.set("view engine", "ejs");
@@ -52,6 +57,7 @@ app.use(session({
 
 app.use(locals);
 app.use(csurf());   
+
 
 
 app.use("/admin", adminRouter)
