@@ -1,5 +1,5 @@
 const Genre = require("../models/genre");
-const Videos = require("../models/Videos");
+const Videos = require("../models/videos");
 const imageUpload = require("../helpers/image-upload");
 const fs = require("fs");
 const slugField = require("../helpers/slugfield");
