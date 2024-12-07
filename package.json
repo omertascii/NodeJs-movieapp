@@ -26,9 +26,15 @@
   "scripts": {
     "dev": "set NODE_ENV=development& set PORT=3000& set DB_PASSWORD=beyaz321& nodemon app.js",
     "prod": "set NODE_ENV=production& set PORT=8080& nodemon app.js",
-    "start": "nodemon app.js"
+    "start": "node app.js"
   },
   "devDependencies": {
     "cross-env": "^7.0.3"
-  }
+  },
+  "name": "node",
+  "version": "1.0.0",
+  "main": "app.js",
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
